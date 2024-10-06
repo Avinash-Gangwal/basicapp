@@ -6,7 +6,7 @@ app_path = os.path.join(os.path.dirname(__file__), '.')
 dotenv_path = os.path.join(app_path, '.env')
 load_dotenv(dotenv_path)
 
-app = Flask("TarotReader")
+app = Flask(__name__)
 app.config.update(
     
     DEBUG= bool(os.environ.get("DEBUG", False)),
@@ -16,8 +16,9 @@ app.config.update(
 )
 @app.route("/")
 def index():
-    return "Welcome to TarotReader here again" 
+    return "Welcome to TarotReader" 
 @app.route('/about')
 def about():
     return "This is about page"  
-app.run(debug=app.config["DEBUG"], host='0.0.0.0',port=int (app.config["PORT"]))
+if __name__=="__main__":
+    app.run(debug=app.config["DEBUG"], host='0.0.0.0',port=int (app.config["PORT"]))
